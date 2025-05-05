@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Nama Pengguna</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Masukkan Nama Anda</h2>
+  <form id="userForm">
+    <input type="text" id="username" placeholder="Nama pengguna" required>
+    <button type="submit">Simpan</button>
+  </form>
+
+  <h3 id="greeting"></h3>
+
+  <script>
+    // Cek apakah ada nama tersimpan saat halaman dimuat
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedName = localStorage.getItem("namaPengguna");
+      if (savedName) {
+        document.getElementById("greeting").textContent = "Halo, " + savedName + "!";
+      }
+    });
+
+    // Tangani submit form
+    document.getElementById("userForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Mencegah reload halaman
+      const name = document.getElementById("username").value;
+      localStorage.setItem("namaPengguna", name);
+      document.getElementById("greeting").textContent = "Halo, " + name + "!";
+      document.getElementById("username").value = ""; // Kosongkan input
+    });
+  </script>
+
+</body>
+</html>
